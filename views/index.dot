@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>ToDo Course</title>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+var socket = io.connect('http://todo-course.ofshard.c9.io/');
+
+socket.on('news', function (data) {
+    document.getElementById('news').innerHTML = JSON.stringify(data);
+    console.log('news', data);
+    socket.emit('my other event', { my: 'data' });
+});
+</script>
+</head>
+<body>
+    {{=it.value}} 
+    {{ if( it.username ) { }}
+    {{=it.username}}
+    {{ } }}
+    <h1>ToDo Course 2</h1>
+    <span id="news"></span>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+
+    {{ if( it.user ) { }}
+    <a href="/user/{{=it.user._id}}/calendar">Calendar</a>
+    {{ } }}
+</body>
+</html>
